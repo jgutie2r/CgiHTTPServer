@@ -1,0 +1,1 @@
+/ayuntamiento/detalles_partida;/var/web/cgi-bin/get_detalles_presupuesto.sh partida
