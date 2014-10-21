@@ -1,4 +1,4 @@
-StaticHTTPServer
+CgiHTTPServer
 ================
 
 This is a lightweight HTTP server that was created for teaching 
