@@ -2,7 +2,7 @@ CgiHTTPServer
 ================
 
 This is a lightweight HTTP server that was created for teaching 
-purposes.
+purposes. It can handle static and dynamic (CGI-like) responses.
 
 You can clone the project with the following shell command:
 
