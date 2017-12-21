@@ -46,10 +46,11 @@ public class TaskCGIResponse implements Runnable {
 				HashMap<String, String> pGet = UtilsHTTP.getParamsGet(resource);
 				// Add the args in the correct order
 				for (String arg : pao.getArgumentOrder()) {
-					cmdLine.add("\""+pGet.get(arg)+"\"");
+					cmdLine.add(pGet.get(arg));
 				}
 				UtilsHTTP.showParams(pGet);
-				UtilsCGI.callProcess(out, cmdLine);
+				if (UtilsCGI.callProcess(out, cmdLine) != 0)
+   			   UtilsHTTP.writeResponseServerError(new PrintWriter(out));
 
 			} else if (requestMethod.equals("POST")) {
 				InputStream in = canal.getInputStream();
@@ -57,12 +58,13 @@ public class TaskCGIResponse implements Runnable {
 						.getBody(UtilsHTTP.getHeaders(in), in));
 				// Add the args in the correct order
 				for (String arg : pao.getArgumentOrder()){
-					cmdLine.add("\""+pPost.get(arg)+"\"");
+					cmdLine.add(pPost.get(arg));
 				}
 
 				UtilsHTTP.showParams(pPost);
 
-				UtilsCGI.callProcess(out, cmdLine);
+            if (UtilsCGI.callProcess(out, cmdLine) != 0)
+      			 UtilsHTTP.writeResponseServerError(new PrintWriter(out));
 				in.close();
 			} else
 				UtilsHTTP.writeResponseNotImplemented(new PrintWriter(out),

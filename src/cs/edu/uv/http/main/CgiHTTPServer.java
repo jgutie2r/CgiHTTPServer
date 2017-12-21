@@ -56,7 +56,7 @@ class CgiHTTPServer {
 		}
 
 		System.out
-				.println("-----  THIS SERVER WAS DESIGNED FOR TEACHING PURPOSES ----------");
+				.println("-----  THIS SERVER WAS DESIGNED FOR TEACHING OR RESEARCH PURPOSES ----------");
 		System.out
 				.println("-----  IT CANNOT BE USED IN PRODUCTION ENVIRONMENTS ------------");
 		System.out

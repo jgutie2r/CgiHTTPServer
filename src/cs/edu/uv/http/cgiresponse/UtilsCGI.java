@@ -22,22 +22,31 @@ public class UtilsCGI {
 	 *            output of the process will be send to this output stream
 	 * @param command
 	 *            "program arg1 arg2 ... argN" as a List<String>
+    * @returns the output result of the process 
 	 * @throws Exception
 	 */
-	public static void callProcess(OutputStream out, List<String> command)
+	public static int callProcess(OutputStream out, List<String> command)
 			throws Exception {
 		// Allows to execute a command with arguments
 		ProcessBuilder pb = new ProcessBuilder(command);
 		Process p = pb.start();
+ 		// This will allow to read from the output of the process
+   	InputStream in = p.getInputStream();
 
-		// This will allow to read from the output of the process
-		InputStream in = p.getInputStream();
+      byte[] bloque = new byte[1024];
+      int leidos;
+      
+      int res = p.waitFor();
+      if (res == 0){
 
-		int dato = 0;
-		while ((dato = in.read()) != -1)
-			out.write(dato);
-		in.close();
-		out.close();
+		   int dato = 0;
+		   while ((leidos = in.read(bloque)) != -1)
+			   out.write(bloque,0,leidos);
+         
+         out.flush();
+		   in.close();
+      }
+      return res;
 	}
 
 	/**
@@ -71,7 +80,6 @@ public class UtilsCGI {
 			br.close();
 		} catch (Exception ex) {
 			ex.printStackTrace();
-
 		}
 		return maps;
 	}
